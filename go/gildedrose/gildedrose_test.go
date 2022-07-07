@@ -23,10 +23,10 @@ func TestUpdateQuality(t *testing.T) {
 			},
 		},
 		{
-			name: "handle Tafkal",
+			name: "handle Backstage pass",
 			args: args{
 				items: []*Item{
-					{Quality: 1, Name: "Tafkal", SellIn: 1}, {Quality: 2, Name: "Tafkal", SellIn: 0},
+					{Quality: 1, Name: "Backstage pass", SellIn: 1}, {Quality: 2, Name: "Backstage passÏ", SellIn: 0},
 				},
 			},
 		},
