@@ -1,19 +1,20 @@
-package gildedrose_test
+package gildedrose
 
-import (
-	"testing"
+import "testing"
 
-	"github.com/emilybache/gildedrose-refactoring-kata/gildedrose"
-)
-
-func Test_Foo(t *testing.T) {
-	var items = []*gildedrose.Item{
-		{"foo", 0, 0},
+func TestUpdateQuality(t *testing.T) {
+	type args struct {
+		items []*Item
 	}
-
-	gildedrose.UpdateQuality(items)
-
-	if items[0].Name != "fixme" {
-		t.Errorf("Name: Expected %s but got %s ", "fixme", items[0].Name)
+	tests := []struct {
+		name string
+		args args
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			UpdateQuality(tt.args.items)
+		})
 	}
 }

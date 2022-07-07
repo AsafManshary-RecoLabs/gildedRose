@@ -5,54 +5,80 @@ type Item struct {
 	SellIn, Quality int
 }
 
-func UpdateQuality(items []*Item) {
+func UpdateQuality(items []*Item) (err error) {
 	for i := 0; i < len(items); i++ {
+		err = UpdateQualityPerItem(items[i])
+		if err == nil {
+			return err
+		}
+	}
+	return nil
+}
+func UpdateOther(item *Item) (err error) {
+	if item.Quality < 50 {
+		item.Quality = item.Quality + 1
+	}
+	item.SellIn = item.SellIn - 1
+	if item.Quality < 50 {
+		item.Quality = item.Quality + 1
+	}
+	if item.SellIn < 0 {
 
-		if items[i].Name != "Aged Brie" && items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
-			if items[i].Quality > 0 {
-				if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-					items[i].Quality = items[i].Quality - 1
-				}
-			}
-		} else {
-			if items[i].Quality < 50 {
-				items[i].Quality = items[i].Quality + 1
-				if items[i].Name == "Backstage passes to a TAFKAL80ETC concert" {
-					if items[i].SellIn < 11 {
-						if items[i].Quality < 50 {
-							items[i].Quality = items[i].Quality + 1
-						}
-					}
-					if items[i].SellIn < 6 {
-						if items[i].Quality < 50 {
-							items[i].Quality = items[i].Quality + 1
-						}
-					}
-				}
+	}
+	return err
+}
+func UpdateSulf(item *Item) (err error) {
+	return err
+}
+
+func UpdateBrie(item *Item) (err error) {
+	if item.Quality < 50 {
+		item.Quality = item.Quality + 1
+	}
+	item.SellIn = item.SellIn - 1
+	if item.Quality < 50 {
+		item.Quality = item.Quality + 1
+	}
+	if item.SellIn < 0 {
+
+	}
+	return err
+}
+func UpdateTafkal(item *Item) (err error) {
+	if item.Quality < 50 {
+		item.Quality = item.Quality + 1
+		if item.SellIn < 11 {
+			if item.Quality < 50 {
+				item.Quality = item.Quality + 1
 			}
 		}
-
-		if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-			items[i].SellIn = items[i].SellIn - 1
-		}
-
-		if items[i].SellIn < 0 {
-			if items[i].Name != "Aged Brie" {
-				if items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
-					if items[i].Quality > 0 {
-						if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-							items[i].Quality = items[i].Quality - 1
-						}
-					}
-				} else {
-					items[i].Quality = items[i].Quality - items[i].Quality
-				}
-			} else {
-				if items[i].Quality < 50 {
-					items[i].Quality = items[i].Quality + 1
-				}
+		if item.SellIn < 6 {
+			if item.Quality < 50 {
+				item.Quality = item.Quality + 1
 			}
 		}
 	}
-
+	item.SellIn = item.SellIn - 1
+	if item.Quality < 50 {
+		item.Quality = item.Quality + 1
+	}
+	if item.SellIn < 0 {
+		item.Quality = item.Quality - item.Quality
+	}
+	return err
+}
+func UpdateQualityPerItem(item *Item) (err error) {
+	const Tafkal = "Backstage passes to a TAFKAL80ETC concert"
+	const Sulfuras = "Sulfuras, Hand of Ragnaros"
+	const Brie = "Aged Brie"
+	if item.Name == Tafkal {
+		return UpdateTafkal(item)
+	}
+	if item.Name == Brie {
+		return UpdateBrie(item)
+	}
+	if item.Name == Sulfuras {
+		return UpdateSulf(item)
+	}
+	return UpdateOther(item)
 }
