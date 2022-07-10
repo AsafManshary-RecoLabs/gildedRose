@@ -1,10 +1,11 @@
 package gildedrose
 
+// UpdateQuality - updates list of items
 func UpdateQuality(items []*Item) {
-	for i := 0; i < len(items); i++ {
-		UpdateQualityPerItem(items[i])
+	for _, item := range items {
+		updateQualityPerItem(item)
 	}
 }
-func UpdateQualityPerItem(item *Item) {
+func updateQualityPerItem(item *Item) {
 	getUpdater(item).Update()
 }
